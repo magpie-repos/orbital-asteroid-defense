@@ -11,12 +11,13 @@ Status: Tasking
   - [x] Create circular orbit/s
   - [x] Create Planet Sprites & Collider
 - [ ] Setup Player controller
-  - [ ] Line rotates around player planet to indicate fire direction
-  - [ ] Ability to fire missiles
+  - [x] Line rotates around player planet to indicate fire direction
+  - [x] Ability to fire missiles (limited by missile cap)
 - [ ] Create Missile/s
   - [ ] Missiles are drawn towards planets based on gravity value
+  - [x] Created Missile Scene
   - [ ] Missiles explode on collision
-  - [ ] (OP) Missiles leave trail
+  - [x] (OP) Missiles leave trail
 - [ ] Create Asteroids
   - [ ] Asteroids are drawn to player planet (they ignore other planets, pretend they are sentient and angry)
   - [ ] Asteroids are destroyed on collision (w planets, missiles)
@@ -24,7 +25,6 @@ Status: Tasking
   - [ ] Track Score
   - [ ] Spawn Asteroids
   - [ ] Handle game over/reset
-  - [ ] Manage Missile Pool
 - [ ] Create sounds
   - [ ] Missile explosion
   - [ ] Missile launch

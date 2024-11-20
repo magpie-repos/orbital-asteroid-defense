@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://qp5rg8xqdov2"]
+
+[ext_resource type="Script" path="res://scripts/missile.gd" id="1_b326g"]
+
+[sub_resource type="Gradient" id="Gradient_2qsd7"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cdfaw"]
+gradient = SubResource("Gradient_2qsd7")
+width = 8
+height = 8
+
+[sub_resource type="Gradient" id="Gradient_0j7gf"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sm135"]
+gradient = SubResource("Gradient_0j7gf")
+width = 1
+height = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0t00t"]
+size = Vector2(8, 8)
+
+[node name="Missile" type="Node2D"]
+script = ExtResource("1_b326g")
+
+[node name="MissileSprite" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_cdfaw")
+
+[node name="MissileParticleTrail" type="CPUParticles2D" parent="."]
+amount = 16
+lifetime = 10.0
+texture = SubResource("GradientTexture2D_sm135")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(0, 0)
+spread = 20.0
+gravity = Vector2(0, 0)
+damping_min = 2.7
+damping_max = 2.755
+
+[node name="MissileArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MissileArea2D"]
+shape = SubResource("RectangleShape2D_0t00t")
+
+[connection signal="area_entered" from="MissileArea2D" to="." method="_on_missile_area_2d_area_entered"]
