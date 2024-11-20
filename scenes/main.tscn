@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwdhvkjw8iiri"]
+
+[ext_resource type="PackedScene" uid="uid://bwbbo87xf2kmb" path="res://scenes/planet.tscn" id="1_66jwk"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_5aqob"]
+
+[sub_resource type="Gradient" id="Gradient_0pebe"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qajhe"]
+gradient = SubResource("Gradient_0pebe")
+width = 16
+height = 16
+
+[sub_resource type="Gradient" id="Gradient_w441f"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_72tao"]
+gradient = SubResource("Gradient_w441f")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77h2x"]
+size = Vector2(16, 16)
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Background" type="Sprite2D" parent="Camera2D"]
+scale = Vector2(64, 64)
+texture = SubResource("GradientTexture2D_qajhe")
+
+[node name="Planet" parent="." instance=ExtResource("1_66jwk")]
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("2_5aqob")
+
+[node name="Gun" type="Node2D" parent="Player"]
+
+[node name="GunSprite" type="Sprite2D" parent="Player/Gun"]
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+scale = Vector2(0.25, 0.25)
+texture = SubResource("GradientTexture2D_72tao")
+
+[node name="PlayerArea2D" type="Area2D" parent="Player"]
+
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="Player/PlayerArea2D"]
+shape = SubResource("RectangleShape2D_77h2x")
