@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5cpww8fr0jjx"]
+
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_vcyq3"]
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_vcyq3")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+one_shot = true
+speed_scale = 0.5
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 60.0
+damping_max = 100.0
+angle_min = -720.0
+angle_max = 720.0
+
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

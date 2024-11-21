@@ -9,6 +9,7 @@ var grav_strength: float = 10^100
 ##Refs
 @onready var sprite: Sprite2D = $MissileSprite
 @onready var window_size: Vector2 = get_viewport().size
+@onready var explosion_scene: PackedScene = preload("res://scenes/explosion.tscn")
 
 var grav_bodies: Array [Node]
 
@@ -29,13 +30,21 @@ func _process(delta: float) -> void:
 	##Check to see if still visible in window; explode if not
 	if abs(position.x) > (window_size.x / 2 + 15):
 		exploded.emit(self)
+		queue_free()
 	if abs(position.y) > (window_size.y / 2 + 15):
 		exploded.emit(self)
+		queue_free()
 		
 func _on_missile_area_2d_area_entered(area: Area2D) -> void:
-	print("Boom!")
-	exploded.emit(self)
+	explode()
 	
+func explode() -> void:
+	exploded.emit(self)
+	var explosion: Node2D = explosion_scene.instantiate()
+	explosion.position = position
+	add_sibling(explosion)
+	queue_free()
+
 func calc_grav_influence() -> Vector2:
 	var grav_influence: Vector2 = Vector2.ZERO
 	#var distance_squared: float = 0
@@ -51,4 +60,4 @@ func calc_grav_influence() -> Vector2:
 	return grav_influence
 
 func _on_missile_lifetime_timeout() -> void:
-	exploded.emit(self)
+	queue_free()

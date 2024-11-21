@@ -41,14 +41,14 @@ damping_min = 2.7
 damping_max = 2.755
 
 [node name="MissileArea2D" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MissileArea2D"]
 shape = SubResource("RectangleShape2D_0t00t")
 
 [node name="MissileLifetime" type="Timer" parent="."]
-wait_time = 30.0
+wait_time = 20.0
 one_shot = true
 autostart = true
 
