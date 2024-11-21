@@ -4,32 +4,42 @@ Created: 2024-11-18
 
 Status: Tasking
 
+Time: 5h45m
+
 - [x] Scope
 - [x] Tasking
 - [x] Setup Project
-- [ ] Create Planets
+- [x] Create Planets
   - [x] Create circular orbit/s
   - [x] Create Planet Sprites & Collider
-- [ ] Setup Player controller
+- [x] Setup Player controller
   - [x] Line rotates around player planet to indicate fire direction
   - [x] Ability to fire missiles (limited by missile cap)
 - [ ] Create Missile/s
-  - [ ] Missiles are drawn towards planets based on gravity value
+  - [x] Missiles are drawn towards planets based on gravity value
   - [x] Created Missile Scene
   - [ ] Missiles explode on collision
+    - [ ] Missle's spawn particle burst
   - [x] (OP) Missiles leave trail
 - [ ] Create Asteroids
-  - [ ] Asteroids are drawn to player planet (they ignore other planets, pretend they are sentient and angry)
+  - [x] Asteroids are drawn to player planet (they ignore other planets, pretend they are sentient and angry)
   - [ ] Asteroids are destroyed on collision (w planets, missiles)
 - [ ] Create Game Manager
   - [ ] Track Score
   - [ ] Spawn Asteroids
+  - [ ] spawn planets
   - [ ] Handle game over/reset
 - [ ] Create sounds
   - [ ] Missile explosion
   - [ ] Missile launch
   - [ ] Asteroid destroyed
   - [ ] Planet Destroyed / Game over
+- [ ] Create UI
+  - [ ] Score UI
+  - [ ] Missile stores UI
+  - [ ] Pause text
+  - [ ] Pause Menu
+    - [ ] Instruction text
 
 ## Concept - What it is
 

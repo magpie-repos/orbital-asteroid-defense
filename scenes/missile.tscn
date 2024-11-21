@@ -22,14 +22,15 @@ height = 1
 size = Vector2(8, 8)
 
 [node name="Missile" type="Node2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_b326g")
 
 [node name="MissileSprite" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_cdfaw")
 
 [node name="MissileParticleTrail" type="CPUParticles2D" parent="."]
-amount = 16
-lifetime = 10.0
+amount = 32
+lifetime = 4.0
 texture = SubResource("GradientTexture2D_sm135")
 emission_shape = 3
 emission_rect_extents = Vector2(1, 1)
@@ -46,4 +47,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MissileArea2D"]
 shape = SubResource("RectangleShape2D_0t00t")
 
+[node name="MissileLifetime" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
 [connection signal="area_entered" from="MissileArea2D" to="." method="_on_missile_area_2d_area_entered"]
+[connection signal="timeout" from="MissileLifetime" to="." method="_on_missile_lifetime_timeout"]

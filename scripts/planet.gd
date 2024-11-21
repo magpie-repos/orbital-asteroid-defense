@@ -1,17 +1,20 @@
 extends Node2D
 class_name Planet
 
-var mass: float = 1
+var mass: float = 4
 var rot_speed: float = -0.5
 
 ##Orbit Vars
-var orbit_speed: float = 15
-var orbit_distance: float = 200
+@export var orbit_speed: float = 15
+@export var orbit_distance: float = 200
 var orbit_center: Vector2 = Vector2.ZERO
 var velocity: Vector2 = Vector2.UP
 var vector_from_origin: Vector2 = Vector2.RIGHT
 
 func _ready() -> void:
+	add_to_group("has_gravity")
+	mass *= (scale.x + scale.y) / 2
+	
 	orbit_center = get_parent().position
 	position =  orbit_center + (vector_from_origin * orbit_distance)
 

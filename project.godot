@@ -22,6 +22,10 @@ window/size/viewport_height=1000
 window/size/initial_position_type=3
 window/size/resizable=false
 
+[global_group]
+
+has_gravity=""
+
 [input]
 
 gun_count_clock={

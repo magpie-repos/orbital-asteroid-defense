@@ -17,7 +17,7 @@ gradient = SubResource("Gradient_b4uop")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1ys1"]
 size = Vector2(64, 64)
 
-[node name="Planet" type="Node2D"]
+[node name="Planet" type="Node2D" groups=["has_gravity"]]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_aiqsi")
 

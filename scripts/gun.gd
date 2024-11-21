@@ -20,7 +20,6 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("shoot") && curr_missiles < missile_limit:
 			
 			spawn_missile(Vector2.ZERO, Vector2.from_angle(rotation))
-			print(rotation)
 
 func spawn_missile(missile_pos: Vector2, missile_vector: Vector2):
 	var new_missile: Missile = missile_scene.instantiate()
