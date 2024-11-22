@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bud04j175nfi1"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_enr45"]
+
+[sub_resource type="Gradient" id="Gradient_w441f"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_72tao"]
+gradient = SubResource("Gradient_w441f")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77h2x"]
+size = Vector2(16, 16)
+
+[node name="Player" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_enr45")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = SubResource("GradientTexture2D_72tao")
+
+[node name="PlayerArea2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="PlayerArea2D"]
+shape = SubResource("RectangleShape2D_77h2x")
+
+[connection signal="area_entered" from="PlayerArea2D" to="." method="_on_player_area_2d_area_entered"]

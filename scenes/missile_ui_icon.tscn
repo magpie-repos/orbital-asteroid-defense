@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcpd2ko0om6tn"]
+
+[ext_resource type="Script" path="res://scripts/missile_ui_icon.gd" id="1_g1rtl"]
+
+[sub_resource type="Gradient" id="Gradient_f7ypv"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ovda1"]
+gradient = SubResource("Gradient_f7ypv")
+width = 8
+height = 8
+
+[node name="MissileUIIcon" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_g1rtl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
+texture = SubResource("GradientTexture2D_ovda1")

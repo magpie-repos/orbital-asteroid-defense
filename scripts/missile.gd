@@ -17,6 +17,7 @@ signal exploded
 
 func _ready() -> void:
 	velocity = vector * speed
+	add_to_group("missile")
 	
 
 func _process(delta: float) -> void:

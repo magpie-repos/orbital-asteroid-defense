@@ -1,18 +1,25 @@
 extends Node
 
-@onready var asteroid_scene: PackedScene = preload("res://scenes/asteroid.tscn")
 var game_over: bool = false
 var safe_margin: float = 1.05
+var difficulty: float = 0
+var timer_start_val: float = 8
+
+@onready var asteroid_scene: PackedScene = preload("res://scenes/asteroid.tscn")
 @onready var window_size: float = get_viewport().size.x
+@onready var spawn_timer: Timer = $AsteroidSpawnTimer
 
 func _ready() -> void:
-	$AsteroidSpawnTimer.timeout.emit()
+	for i in range(0, 3):
+		spawn_asteroid()
+		
+func _process(delta: float) -> void:
+	spawn_timer.wait_time = timer_start_val - difficulty / 10
 
 func _on_asteroid_spawn_timer_timeout() -> void:
 	if game_over == false:
 		spawn_asteroid()
-	
-	$AsteroidSpawnTimer.start()
+	spawn_timer.start()
 
 func spawn_asteroid() -> void:
 	var asteroid: Asteroid = asteroid_scene.instantiate()

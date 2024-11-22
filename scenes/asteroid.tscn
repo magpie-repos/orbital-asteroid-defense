@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/asteroid.gd" id="1_48c07"]
 [ext_resource type="Texture2D" uid="uid://cjiw2qahrfkll" path="res://assets/asteroid.png" id="2_quqf6"]
 
-[node name="Asteroid" type="Node2D" groups=["has_gravity"]]
+[node name="Asteroid" type="Node2D" groups=["asteroid", "has_gravity"]]
 scale = Vector2(0.15, 0.15)
 script = ExtResource("1_48c07")
 

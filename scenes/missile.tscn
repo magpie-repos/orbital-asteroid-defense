@@ -22,6 +22,7 @@ height = 1
 size = Vector2(8, 8)
 
 [node name="Missile" type="Node2D"]
+z_index = 5
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_b326g")
 
@@ -40,7 +41,7 @@ gravity = Vector2(0, 0)
 damping_min = 2.7
 damping_max = 2.755
 
-[node name="MissileArea2D" type="Area2D" parent="."]
+[node name="MissileArea2D" type="Area2D" parent="." groups=["missile"]]
 collision_layer = 4
 collision_mask = 2
 

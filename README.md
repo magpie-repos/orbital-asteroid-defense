@@ -2,9 +2,9 @@
 
 Created: 2024-11-18
 
-Status: Tasking
+Status: Dev
 
-Time: 7h40m
+Time: 11h 5m
 
 - [x] Scope
 - [x] Tasking
@@ -24,22 +24,22 @@ Time: 7h40m
 - [x] Create Asteroids
   - [x] Asteroids are drawn to player planet (they ignore other planets, pretend they are sentient and angry)
   - [x] Asteroids are destroyed on collision
-- [ ] Create Game Manager
-  - [ ] Track Score
+- [x] Create Game Manager
+  - [x] Track Score
   - [x] Spawn Asteroids
-  - [ ] spawn planets
-  - [ ] Handle game over/reset
+  - [ ] ~~spawn planets~~
+  - [ ] ~~Handle game over/reset~~
 - [ ] Create sounds
   - [ ] Missile explosion
   - [ ] Missile launch
   - [ ] Asteroid destroyed
   - [ ] Planet Destroyed / Game over
-- [ ] Create UI
-  - [ ] Score UI
-  - [ ] Missile stores UI
-  - [ ] Pause text
-  - [ ] Pause Menu
-    - [ ] Instruction text
+- [x] Create UI
+  - [x] Score UI
+  - [x] Missile stores UI
+  - [ ] ~~Pause text~~
+  - [ ] ~~Pause Menu~~
+    - [ ] ~~Instruction text~~
 
 ## Concept - What it is
 
