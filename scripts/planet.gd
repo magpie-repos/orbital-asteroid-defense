@@ -1,32 +1,36 @@
 extends Node2D
 class_name Planet
 
-var mass: float = 4
-var rot_speed: float = -0.5
+var base_mass: float = 4
+var mass: float = 0
+var rot_speed: float
 
 ##Orbit Vars
-@export var orbit_speed: float = 15
-@export var orbit_distance: float = 200
-var orbit_center: Vector2 = Vector2.ZERO
-var velocity: Vector2 = Vector2.UP
-var vector_from_origin: Vector2 = Vector2.RIGHT
+var orbit_speed: float = 15
+var orbit_distance: float = 200
+var orbit_center: Vector2
+var vector_from_center: Vector2
 
 func _ready() -> void:
 	add_to_group("has_gravity")
-	mass *= (scale.x + scale.y) / 2
-	
-	orbit_center = get_parent().position
-	position =  orbit_center + (vector_from_origin * orbit_distance)
+	orbit_center = get_viewport().size / 2
+	rot_speed = randf_range(0.5, 2) * [-1, 1].pick_random()
 
 func _process(delta: float) -> void:
 	rotation += rot_speed * delta
 
 func _physics_process(delta: float) -> void:
-	##Horrible code to move the planet on an orbit
-	var curr_angle: float = vector_from_origin.angle()
-	var new_angle: float = curr_angle + (orbit_speed * delta * (PI/180))
-	vector_from_origin = Vector2.from_angle(new_angle)
-	var new_pos: Vector2 = vector_from_origin * orbit_distance
-	velocity = Vector2(position.x - new_pos.x, position.y - new_pos.y)
-	position = new_pos
+	var new_angle: float = vector_from_center.angle() + (deg_to_rad(orbit_speed) * delta)
+	vector_from_center = orbit_center.from_angle(new_angle)
+	position = orbit_center + (vector_from_center * orbit_distance)
+
+func setup_planet(init_scale: float, dist: float, center, speed: float) -> void:
+	scale = Vector2(init_scale, init_scale)
+	mass = base_mass * init_scale
+	orbit_distance = dist
+	orbit_center = center
+	vector_from_center = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	orbit_speed = speed * randf_range(0.8, 1.2) * [-1, 1].pick_random()
+		
+	
 	

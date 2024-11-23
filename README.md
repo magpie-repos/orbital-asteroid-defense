@@ -4,7 +4,7 @@ Created: 2024-11-18
 
 Status: Dev
 
-Time: 13h 25m
+Time: 16h 34m
 
 - [x] Scope
 - [x] Tasking
@@ -19,31 +19,29 @@ Time: 13h 25m
   - [x] Missiles are drawn towards planets based on gravity value
   - [x] Created Missile Scene
   - [x] Missiles explode on collision
-    - [x] Missle's spawn particle burst
+	- [x] Missle's spawn particle burst
   - [x] (OP) Missiles leave trail
 - [x] Create Asteroids
   - [x] Asteroids are drawn to player planet (they ignore other planets, pretend they are sentient and angry)
   - [x] Asteroids are destroyed on collision
-- [x] Create Game Manager
+- [x] Create Game Manager (Handled by main)
   - [x] Track Score
   - [x] Spawn Asteroids
-  - [ ] ~~spawn planets~~
-  - [ ] ~~Handle game over/reset
-- [ ] Refactor
-  - [ ] Merge Asteroid spawning into Main
+  - [x] spawn planets
+  - [x] Handle game over/reset
+- [x] Refactor
+  - [x] Merge Asteroid spawning into Main
   - [x] Merge gun and player
-  - [ ] Fix everything
-- [ ] Create sounds
+- [ ] Sound
   - [ ] Missile explosion
   - [ ] Missile launch
   - [ ] Asteroid destroyed
   - [ ] Planet Destroyed / Game over
-- [x] Create UI
-  - [x] Score UI
-  - [x] Missile stores UI
-  - [ ] ~~Pause text~~
-  - [ ] ~~Pause Menu~~
-    - [ ] ~~Instruction text~~
+- [ ] UI
+  - [ ] Create pause UI
+	- [x] Hook up difficulty options
+	- [ ] SFX toggle
+  - [x] Fix Game Over UI
 
 ## Concept - What it is
 

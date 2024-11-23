@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwdhvkjw8iiri"]
+[gd_scene load_steps=13 format=3 uid="uid://dwdhvkjw8iiri"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_d6kkf"]
-[ext_resource type="Script" path="res://scenes/ui.gd" id="3_x1x0u"]
-[ext_resource type="Script" path="res://scenes/game_over_ui.gd" id="7_6nheb"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="3_x1x0u"]
 
 [sub_resource type="Gradient" id="Gradient_0pebe"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -28,8 +27,21 @@ gradient = SubResource("Gradient_a1gi3")
 width = 8
 height = 8
 
+[sub_resource type="Gradient" id="Gradient_jd1lq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jywcr"]
+gradient = SubResource("Gradient_jd1lq")
+
+[sub_resource type="Gradient" id="Gradient_3ags1"]
+offsets = PackedFloat32Array(0, 0.993506)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eit36"]
+gradient = SubResource("Gradient_3ags1")
+
 [node name="Main" type="Node2D" groups=["main"]]
-process_mode = 3
+process_mode = 1
 script = ExtResource("1_d6kkf")
 
 [node name="AsteroidSpawnTimer" type="Timer" parent="."]
@@ -42,31 +54,55 @@ scale = Vector2(64, 64)
 texture = SubResource("GradientTexture2D_qajhe")
 centered = false
 
-[node name="GameOverUI" type="Control" parent="."]
-visible = false
+[node name="UI" type="Control" parent="."]
+process_mode = 3
 z_index = 100
-custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1000.0
+offset_bottom = 1000.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("7_6nheb")
+script = ExtResource("3_x1x0u")
 
-[node name="GameOverBoxStroke" type="Sprite2D" parent="GameOverUI"]
+[node name="MissileIconDisplay" type="Node2D" parent="UI"]
+z_index = -50
+position = Vector2(500, 500)
+
+[node name="GameOverUI" type="Control" parent="UI"]
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="GameOverBoxStroke" type="Sprite2D" parent="UI/GameOverUI"]
 position = Vector2(500, 502)
 scale = Vector2(25, 15.45)
 texture = SubResource("GradientTexture2D_r8ope")
 
-[node name="GameOverBoxStroke2" type="Sprite2D" parent="GameOverUI"]
+[node name="GameOverBoxFill" type="Sprite2D" parent="UI/GameOverUI"]
 position = Vector2(500, 502)
 scale = Vector2(24.61, 15.1)
 texture = SubResource("GradientTexture2D_3ngof")
 
-[node name="CenterContainer" type="CenterContainer" parent="GameOverUI"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/GameOverUI"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -80,37 +116,111 @@ offset_bottom = 63.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOverUI/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameOverUI/CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = -20
+theme_override_constants/separation = -15
 
-[node name="FinalScoreText" type="Label" parent="GameOverUI/CenterContainer/VBoxContainer"]
+[node name="FinalScoreText" type="Label" parent="UI/GameOverUI/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "final score:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="FinalScore" type="Label" parent="GameOverUI/CenterContainer/VBoxContainer"]
+[node name="FinalScore" type="Label" parent="UI/GameOverUI/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 70
 text = "####"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameOverText" type="Label" parent="GameOverUI/CenterContainer/VBoxContainer"]
+[node name="GameOverText" type="Label" parent="UI/GameOverUI/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "press 'r' to reset"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("3_x1x0u")
+[node name="PauseUI" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="MissileIconDisplay" type="Node2D" parent="UI"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/PauseUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseBoxStroke" type="Sprite2D" parent="UI/PauseUI/CenterContainer"]
 position = Vector2(500, 500)
+scale = Vector2(3, 4)
+texture = SubResource("GradientTexture2D_jywcr")
+
+[node name="PauseBoxFill" type="Sprite2D" parent="UI/PauseUI/CenterContainer/PauseBoxStroke"]
+scale = Vector2(0.975, 0.985)
+texture = SubResource("GradientTexture2D_eit36")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="UI/PauseUI/CenterContainer"]
+layout_mode = 2
+
+[node name="PausedText" type="Label" parent="UI/PauseUI/CenterContainer/VSplitContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "Options"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseUI/CenterContainer/VSplitContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DifficultyLabel" type="Label" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 25
+text = "DIFFICULTY"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="EasyText" type="Label" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "easy"
+
+[node name="MedText" type="Label" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 10
+text = "normal
+"
+
+[node name="Hard Text" type="Label" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "hard"
+
+[node name="HSlider" type="HSlider" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
+layout_mode = 2
+max_value = 2.0
+value = 1.0
+tick_count = 3
+
+[node name="HSeparator2" type="HSeparator" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PauseTimer" type="Timer" parent="UI"]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
+[connection signal="value_changed" from="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer/HSlider" to="." method="_on_diff_slider_changed"]
+[connection signal="timeout" from="UI/PauseTimer" to="UI" method="_on_pause_timer_timeout"]
