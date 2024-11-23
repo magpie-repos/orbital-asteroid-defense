@@ -1,34 +1,27 @@
-extends Node2D
+extends Control
 
-##Missile count display
-var missile_icon_scene: PackedScene = preload("res://scenes/missile_ui_icon.tscn")
-@export var missile_display: Node2D
-var missile_icon_distance: float = 35
-var missile_icon_array: Array [Node2D] = []
+##Missile Icon Display
+@onready var missile_icon_scene: PackedScene = preload("res://scenes/missile_ui_icon.tscn")
+@onready var missile_display: Node2D = $MissileIconDisplay
 var icon_rotation_offset: float = 0
-	
+var missile_count: int = 0
 
-func _ready() -> void:
-	update_stored_missile_display(0)
-
-func _process(delta: float) -> void:
-	
-	update_stored_missile_display(delta)
-	icon_rotation_offset += 10 * delta
-
-func update_stored_missile_display(delta: float) -> void:
+func update_missile_count_display(missile_count: int) -> void:
 	var missile_icon_spacing: float
-	if stored_missiles > 0:
-		missile_icon_spacing = deg_to_rad(360 / stored_missiles)
+	var missile_icon_distance: float = 35
+	var missile_icon_array: Array [Node2D] = []
+	
+	if missile_count > 0:
+		missile_icon_spacing = 2 * PI / missile_count 
 	else:
 		missile_icon_spacing = 0
 	
-	if missile_icon_array.size() < stored_missiles:
+	if missile_icon_array.size() < missile_count:
 		var new_icon: Node2D = missile_icon_scene.instantiate()
 		missile_display.add_child(new_icon)
 		missile_icon_array.append(new_icon)
 	
-	if missile_icon_array.size() > stored_missiles:
+	if missile_icon_array.size() > missile_count:
 		missile_icon_array[missile_icon_array.size() - 1].queue_free()
 		missile_icon_array.remove_at(missile_icon_array.size() - 1)
 

@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dwdhvkjw8iiri"]
+[gd_scene load_steps=10 format=3 uid="uid://dwdhvkjw8iiri"]
 
-[ext_resource type="PackedScene" uid="uid://bwbbo87xf2kmb" path="res://scenes/planet.tscn" id="1_66jwk"]
-[ext_resource type="Script" path="res://scripts/asteroid_spawner.gd" id="1_aa2iq"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_d6kkf"]
+[ext_resource type="Script" path="res://scenes/ui.gd" id="3_x1x0u"]
 [ext_resource type="Script" path="res://scenes/game_over_ui.gd" id="7_6nheb"]
 
 [sub_resource type="Gradient" id="Gradient_0pebe"]
@@ -33,31 +32,15 @@ height = 8
 process_mode = 3
 script = ExtResource("1_d6kkf")
 
+[node name="AsteroidSpawnTimer" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -5
 scale = Vector2(64, 64)
 texture = SubResource("GradientTexture2D_qajhe")
 centered = false
-
-[node name="AsteroidSpawner" type="Node2D" parent="."]
-process_mode = 1
-script = ExtResource("1_aa2iq")
-
-[node name="AsteroidSpawnTimer" type="Timer" parent="AsteroidSpawner"]
-wait_time = 9.0
-one_shot = true
-autostart = true
-
-[node name="SolarSystem" type="Node2D" parent="."]
-process_mode = 1
-position = Vector2(500, 500)
-
-[node name="Planet" parent="SolarSystem" instance=ExtResource("1_66jwk")]
-scale = Vector2(0.125, 0.125)
-
-[node name="Planet2" parent="SolarSystem" instance=ExtResource("1_66jwk")]
-orbit_speed = 9.05
-orbit_distance = 100.0
 
 [node name="GameOverUI" type="Control" parent="."]
 visible = false
@@ -125,5 +108,9 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("3_x1x0u")
 
-[connection signal="timeout" from="AsteroidSpawner/AsteroidSpawnTimer" to="AsteroidSpawner" method="_on_asteroid_spawn_timer_timeout"]
+[node name="MissileIconDisplay" type="Node2D" parent="UI"]
+position = Vector2(500, 500)
+
+[connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]

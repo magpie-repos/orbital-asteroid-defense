@@ -43,15 +43,14 @@ func explode() -> void:
 	queue_free()
 
 func calc_grav_influence() -> Vector2:
-	var grav_influence: Vector2 = Vector2.ZERO
-	#var distance_squared: float = 0
+	var grav_influence: Vector2;
+	var direction_to_body: Vector2;
 	var distance: float = 0
-	var direction_to_body: Vector2 = Vector2.ZERO
 	
 	grav_bodies = get_tree().get_nodes_in_group("has_gravity")
 	for b in grav_bodies:
-		distance = position.distance_to(b.position + Vector2( 500, 500)) 
-		direction_to_body = position.direction_to(b.position + Vector2( 500, 500))
+		distance = position.distance_to(b.position) 
+		direction_to_body = position.direction_to(b.position)
 		grav_influence += direction_to_body * (b.mass / distance)
 	
 	return grav_influence

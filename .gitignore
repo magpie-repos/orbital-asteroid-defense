@@ -4,3 +4,5 @@
 
 # Personal ingores
 *.tmp
+assets
+/addons
