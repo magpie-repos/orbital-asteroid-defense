@@ -4,7 +4,7 @@ Created: 2024-11-18
 
 Status: Dev
 
-Time: 16h 34m
+Time: 17h 10m
 
 - [x] Scope
 - [x] Tasking
@@ -19,7 +19,7 @@ Time: 16h 34m
   - [x] Missiles are drawn towards planets based on gravity value
   - [x] Created Missile Scene
   - [x] Missiles explode on collision
-	- [x] Missle's spawn particle burst
+    - [x] Missle's spawn particle burst
   - [x] (OP) Missiles leave trail
 - [x] Create Asteroids
   - [x] Asteroids are drawn to player planet (they ignore other planets, pretend they are sentient and angry)
@@ -39,8 +39,9 @@ Time: 16h 34m
   - [ ] Planet Destroyed / Game over
 - [ ] UI
   - [ ] Create pause UI
-	- [x] Hook up difficulty options
-	- [ ] SFX toggle
+    - [x] Hook up difficulty options
+    - [ ] SFX toggle
+      - [ ] Create Sound Manager & Link everything to it
   - [x] Fix Game Over UI
 
 ## Concept - What it is
