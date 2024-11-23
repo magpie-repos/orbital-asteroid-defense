@@ -28,7 +28,11 @@ Time: 11h 5m
   - [x] Track Score
   - [x] Spawn Asteroids
   - [ ] ~~spawn planets~~
-  - [ ] ~~Handle game over/reset~~
+  - [ ] ~~Handle game over/reset
+- [ ] Refactor
+  - [ ] Merge Asteroid spawning into Main
+  - [x] Merge gun and player
+  - [ ] Fix everything
 - [ ] Create sounds
   - [ ] Missile explosion
   - [ ] Missile launch

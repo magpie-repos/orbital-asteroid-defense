@@ -1,6 +1,8 @@
 extends Node2D
 class_name Missile
 
+##Misc
+var screen_margin: float = 100
 ##Phys Vars
 var velocity: Vector2 = Vector2.UP
 var vector: Vector2 = Vector2.UP
@@ -13,12 +15,9 @@ var grav_strength: float = 10^100
 
 var grav_bodies: Array [Node]
 
-signal exploded
-
 func _ready() -> void:
 	velocity = vector * speed
-	add_to_group("missile")
-	
+	add_to_group("missile")	
 
 func _process(delta: float) -> void:
 	## Handle missile trajectory
@@ -29,18 +28,15 @@ func _process(delta: float) -> void:
 	sprite.rotation = get_angle_to(velocity.normalized())
 	
 	##Check to see if still visible in window; explode if not
-	if abs(position.x) > (window_size.x / 2 + 15):
-		exploded.emit(self)
+	if position.x <= 0 - screen_margin || position.y <= 0 - screen_margin:
 		queue_free()
-	if abs(position.y) > (window_size.y / 2 + 15):
-		exploded.emit(self)
+	if position.x >= window_size.x + screen_margin || position.y >= window_size.y + screen_margin:
 		queue_free()
 		
 func _on_missile_area_2d_area_entered(area: Area2D) -> void:
 	explode()
 	
 func explode() -> void:
-	exploded.emit(self)
 	var explosion: Node2D = explosion_scene.instantiate()
 	explosion.position = position
 	add_sibling(explosion)
@@ -54,8 +50,8 @@ func calc_grav_influence() -> Vector2:
 	
 	grav_bodies = get_tree().get_nodes_in_group("has_gravity")
 	for b in grav_bodies:
-		distance = position.distance_to(b.position)
-		direction_to_body = position.direction_to(b.position)
+		distance = position.distance_to(b.position + Vector2( 500, 500)) 
+		direction_to_body = position.direction_to(b.position + Vector2( 500, 500))
 		grav_influence += direction_to_body * (b.mass / distance)
 	
 	return grav_influence

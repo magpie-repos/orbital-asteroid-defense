@@ -12,7 +12,7 @@ var game_manager: Node2D
 
 var rot_speed: float = 8
 
-var player_pos: Vector2 = Vector2.ZERO
+var player_pos: Vector2 = Vector2(500, 500)
 
 func _ready() -> void:
 	vector = position.direction_to(player_pos)
