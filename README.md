@@ -4,7 +4,7 @@ Created: 2024-11-18
 
 Status: Dev
 
-Time: 17h 10m
+Time: 18h 30m
 
 - [x] Scope
 - [x] Tasking
@@ -33,15 +33,15 @@ Time: 17h 10m
   - [x] Merge Asteroid spawning into Main
   - [x] Merge gun and player
 - [ ] Sound
-  - [ ] Missile explosion
-  - [ ] Missile launch
-  - [ ] Asteroid destroyed
-  - [ ] Planet Destroyed / Game over
+  - [x] Missile explosion
+  - [x] Missile launch
+  - [ ] Game Over
+  - [ ] Point Gain
 - [ ] UI
   - [ ] Create pause UI
     - [x] Hook up difficulty options
     - [ ] SFX toggle
-      - [ ] Create Sound Manager & Link everything to it
+      - [x] Create Sound Manager
   - [x] Fix Game Over UI
 
 ## Concept - What it is

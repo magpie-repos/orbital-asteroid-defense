@@ -17,7 +17,9 @@ var grav_bodies: Array [Node]
 
 func _ready() -> void:
 	velocity = vector * speed
-	add_to_group("missile")	
+	add_to_group("missile")
+	var audio_manager: AudioManager = get_parent().find_child("AudioManager")
+	audio_manager.play_sound("missile")
 
 func _process(delta: float) -> void:
 	## Handle missile trajectory

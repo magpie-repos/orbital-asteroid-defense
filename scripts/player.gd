@@ -11,7 +11,7 @@ var gun_rot_speed: float = 60
 @onready var player_sprite: Sprite2D = $PlayerSprite
 @onready var gun_sprite: Sprite2D = $GunSprite
 @onready var missile_recarge_timer: Timer = $MissileRechargeTimer
-@onready var missile_sfx: AudioStreamPlayer2D = $MissileLaunchSFX
+
 
 signal died
 
@@ -37,7 +37,6 @@ func _process(delta: float) -> void:
 			spawn_missile(position, Vector2.from_angle(gun_sprite.rotation))
 
 func spawn_missile(missile_pos: Vector2, missile_vector: Vector2):
-	missile_sfx.play()
 	var new_missile: Missile = missile_scene.instantiate()
 	new_missile.position = missile_pos
 	new_missile.vector = missile_vector

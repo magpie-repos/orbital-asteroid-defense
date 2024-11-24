@@ -1,7 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwdhvkjw8iiri"]
+[gd_scene load_steps=16 format=3 uid="uid://dwdhvkjw8iiri"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_d6kkf"]
+[ext_resource type="Script" path="res://scenes/audio_manager.gd" id="3_jcylk"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="3_x1x0u"]
+[ext_resource type="AudioStream" uid="uid://c1pfflbs2yt11" path="res://assets/missile_launch_sfx.wav" id="4_cmx6a"]
+[ext_resource type="AudioStream" uid="uid://dmksrpc0a87xx" path="res://assets/explosion_sfx.wav" id="5_1f853"]
 
 [sub_resource type="Gradient" id="Gradient_0pebe"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -220,6 +223,18 @@ layout_mode = 2
 [node name="PauseTimer" type="Timer" parent="UI"]
 wait_time = 0.2
 one_shot = true
+
+[node name="AudioManager" type="Node2D" parent="."]
+script = ExtResource("3_jcylk")
+
+[node name="MissileSFX" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("4_cmx6a")
+volume_db = 2.0
+max_polyphony = 3
+
+[node name="ExplosionSFX" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("5_1f853")
+max_polyphony = 8
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
 [connection signal="value_changed" from="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer/HSlider" to="." method="_on_diff_slider_changed"]

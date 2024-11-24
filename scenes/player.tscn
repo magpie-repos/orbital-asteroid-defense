@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bud04j175nfi1"]
+[gd_scene load_steps=7 format=3 uid="uid://bud04j175nfi1"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_enr45"]
-[ext_resource type="AudioStream" uid="uid://c1pfflbs2yt11" path="res://assets/missile_launch_sfx.wav" id="2_gwwo4"]
 
 [sub_resource type="Gradient" id="Gradient_w441f"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -42,11 +41,6 @@ centered = false
 wait_time = 0.5
 one_shot = true
 autostart = true
-
-[node name="MissileLaunchSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_gwwo4")
-volume_db = -0.65
-attenuation = 3.13834
 
 [connection signal="area_entered" from="PlayerArea2D" to="." method="_on_player_area_2d_area_entered"]
 [connection signal="timeout" from="MissileRechargeTimer" to="." method="_on_missile_recharge_timer_timeout"]
