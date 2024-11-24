@@ -13,18 +13,30 @@ var difficulty_setting: int
 @onready var game_over_score_label: Label = $GameOverUI/CenterContainer/VBoxContainer/FinalScore
 @onready var missile_icons: Node2D = $MissileIconDisplay
 @onready var pause_ui: Control = $PauseUI
+@onready var intro_ui: Control = $IntroUI
 
-var paused: bool = false
+signal sound_toggle(value: bool)
+
+var intro_lockout: bool = true
+var paused: bool = true
 var pause_timeout: bool = false
 
+func _ready() -> void:
+	get_tree().paused = true
+	
 func _process(delta: float) -> void:
 	icon_rotation_offset += deg_to_rad(5)
 
-	if Input.is_action_just_pressed("pause"):
-		if paused == false:
-			pause_game()
-		else:
-			resume_game()
+	if Input.is_anything_pressed():
+		intro_ui.hide()
+		get_tree().paused = false
+		intro_lockout = false
+	if intro_lockout == false:
+		if Input.is_action_just_pressed("pause"):
+			if paused == false:
+				pause_game()
+			else:
+				resume_game()
 
 func pause_game() -> void:
 	get_tree().paused = true
@@ -77,3 +89,9 @@ func hide_game_over_text() -> void:
 
 func _on_pause_timer_timeout() -> void:
 	pause_timeout = false
+
+
+func _on_sfx_enable_toggled(toggled_on: bool) -> void:
+	sound_toggle.emit(toggled_on)
+	
+	

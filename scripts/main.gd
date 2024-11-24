@@ -23,7 +23,6 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed("reset"):
 			end_game()
 			new_game()
-		debug_commands()
 	
 	if player != null:
 		ui.update_missile_count_display(player.stored_missiles)
@@ -55,11 +54,6 @@ func spawn_planets() -> void:
 		var planet: Planet = planet_scene.instantiate()
 		planet.setup_planet(0.3, 200, window_size / 2, -20)
 		add_child(planet)
-		
-		
-func debug_commands() -> void:
-	if Input.is_action_just_pressed("debug_kill"):
-		end_game()
 
 func new_game() -> void:
 	score = 0
@@ -92,13 +86,13 @@ func end_game() -> void:
 	
 	if player != null:
 		player.queue_free()
-		
+	var audio_manager: AudioManager = find_child("AudioManager")
+	audio_manager.play_sound("loose")
 	
 	ui.show_game_over_text(score)
 
 func score_points(point_value: int) -> void:
 	score += point_value
-
 
 func _on_player_died() -> void:
 	end_game()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwdhvkjw8iiri"]
+[gd_scene load_steps=21 format=3 uid="uid://dwdhvkjw8iiri"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_d6kkf"]
-[ext_resource type="Script" path="res://scenes/audio_manager.gd" id="3_jcylk"]
+[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="3_jcylk"]
 [ext_resource type="Script" path="res://scripts/ui.gd" id="3_x1x0u"]
 [ext_resource type="AudioStream" uid="uid://c1pfflbs2yt11" path="res://assets/missile_launch_sfx.wav" id="4_cmx6a"]
 [ext_resource type="AudioStream" uid="uid://dmksrpc0a87xx" path="res://assets/explosion_sfx.wav" id="5_1f853"]
+[ext_resource type="AudioStream" uid="uid://daf006b75p0lj" path="res://assets/loose_sfx.wav" id="6_f3x56"]
 
 [sub_resource type="Gradient" id="Gradient_0pebe"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -43,12 +44,24 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_eit36"]
 gradient = SubResource("Gradient_3ags1")
 
+[sub_resource type="Gradient" id="Gradient_lh5kx"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qbmkq"]
+gradient = SubResource("Gradient_lh5kx")
+
+[sub_resource type="Gradient" id="Gradient_y2lt0"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oxnyp"]
+gradient = SubResource("Gradient_y2lt0")
+
 [node name="Main" type="Node2D" groups=["main"]]
 process_mode = 1
 script = ExtResource("1_d6kkf")
 
 [node name="AsteroidSpawnTimer" type="Timer" parent="."]
-wait_time = 7.5
+wait_time = 6.5
 one_shot = true
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -71,6 +84,10 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("3_x1x0u")
+
+[node name="PauseTimer" type="Timer" parent="UI"]
+wait_time = 0.2
+one_shot = true
 
 [node name="MissileIconDisplay" type="Node2D" parent="UI"]
 z_index = -50
@@ -161,7 +178,7 @@ grow_vertical = 2
 
 [node name="PauseBoxStroke" type="Sprite2D" parent="UI/PauseUI/CenterContainer"]
 position = Vector2(500, 500)
-scale = Vector2(3, 4)
+scale = Vector2(3, 1.81)
 texture = SubResource("GradientTexture2D_jywcr")
 
 [node name="PauseBoxFill" type="Sprite2D" parent="UI/PauseUI/CenterContainer/PauseBoxStroke"]
@@ -170,11 +187,13 @@ texture = SubResource("GradientTexture2D_eit36")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="UI/PauseUI/CenterContainer"]
 layout_mode = 2
+theme_override_constants/separation = -660
 
 [node name="PausedText" type="Label" parent="UI/PauseUI/CenterContainer/VSplitContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 20
 text = "Options"
+horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseUI/CenterContainer/VSplitContainer"]
 layout_mode = 2
@@ -182,12 +201,6 @@ alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
-
-[node name="DifficultyLabel" type="Label" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 25
-text = "DIFFICULTY"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
 layout_mode = 2
@@ -217,25 +230,110 @@ max_value = 2.0
 value = 1.0
 tick_count = 3
 
-[node name="HSeparator2" type="HSeparator" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
+[node name="SFXEnable" type="CheckBox" parent="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+button_pressed = true
+text = "SFX"
+
+[node name="IntroUI" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IntroTextBoxStroke" type="Sprite2D" parent="UI/IntroUI"]
+position = Vector2(500, 508.51)
+scale = Vector2(6.73, 5.226)
+texture = SubResource("GradientTexture2D_qbmkq")
+
+[node name="IntroTextBoxFill" type="Sprite2D" parent="UI/IntroUI/IntroTextBoxStroke"]
+scale = Vector2(0.975, 0.975)
+texture = SubResource("GradientTexture2D_oxnyp")
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/IntroUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1.5
+offset_top = -15.5
+offset_right = 1.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/IntroUI/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="IntroTitle" type="Label" parent="UI/IntroUI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 45
+text = "How to Play"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="UI/IntroUI/CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PauseTimer" type="Timer" parent="UI"]
-wait_time = 0.2
-one_shot = true
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/IntroUI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MissileShoot" type="Label" parent="UI/IntroUI/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "- Press 'up', 'space', or 'w' to fire a missile."
+
+[node name="GunRotate" type="Label" parent="UI/IntroUI/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "- Use 'a' and 'd', or 'left' and 'right', to rotate the gun
+and aim your missiles."
+
+[node name="OptionsInfo" type="Label" parent="UI/IntroUI/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "- Hit 'esc' at any time to pause the game, change the 
+difficulty, or disable sound."
+
+[node name="LoseCon" type="Label" parent="UI/IntroUI/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "- Fend off the asteroids coming at your planet for 
+as long as you can, you get a count of how many you 
+shot down when you lose."
+
+[node name="HSeparator" type="HSeparator" parent="UI/IntroUI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PressToStart" type="Label" parent="UI/IntroUI/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "press any key to start"
+horizontal_alignment = 1
 
 [node name="AudioManager" type="Node2D" parent="."]
 script = ExtResource("3_jcylk")
 
 [node name="MissileSFX" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource("4_cmx6a")
-volume_db = 2.0
+volume_db = 4.0
 max_polyphony = 3
+panning_strength = 0.0
 
 [node name="ExplosionSFX" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource("5_1f853")
+volume_db = 5.0
 max_polyphony = 8
+panning_strength = 0.0
+
+[node name="LooseSFX" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("6_f3x56")
+volume_db = -5.0
+panning_strength = 0.0
 
 [connection signal="timeout" from="AsteroidSpawnTimer" to="." method="_on_asteroid_spawn_timer_timeout"]
-[connection signal="value_changed" from="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer/HSlider" to="." method="_on_diff_slider_changed"]
+[connection signal="sound_toggle" from="UI" to="AudioManager" method="_on_ui_sound_toggle"]
 [connection signal="timeout" from="UI/PauseTimer" to="UI" method="_on_pause_timer_timeout"]
+[connection signal="value_changed" from="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer/HSlider" to="." method="_on_diff_slider_changed"]
+[connection signal="toggled" from="UI/PauseUI/CenterContainer/VSplitContainer/VBoxContainer/SFXEnable" to="UI" method="_on_sfx_enable_toggled"]

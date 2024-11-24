@@ -3,7 +3,7 @@ var player_rot_speed: float = 15
 ##Gun Variables
 var stored_missiles: int = 0
 var missile_cap: int = 5
-var gun_rot_speed: float = 60
+var gun_rot_speed: float = 48
 ##Scene Refs
 @onready var explosion_scene: PackedScene = preload("res://scenes/explosion.tscn")
 @onready var missile_scene: PackedScene = preload("res://scenes/missile.tscn")

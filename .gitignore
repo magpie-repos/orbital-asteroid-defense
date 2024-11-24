@@ -4,5 +4,8 @@
 
 # Personal ingores
 *.tmp
-assets
+/builds
 /addons
+/screenshots
+export_presets.cfg
+

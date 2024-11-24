@@ -2,9 +2,9 @@
 
 Created: 2024-11-18
 
-Status: Dev
+Status: Done
 
-Time: 18h 30m
+Time: 19h 35m
 
 - [x] Scope
 - [x] Tasking
@@ -32,17 +32,19 @@ Time: 18h 30m
 - [x] Refactor
   - [x] Merge Asteroid spawning into Main
   - [x] Merge gun and player
-- [ ] Sound
+- [x] Sound
   - [x] Missile explosion
   - [x] Missile launch
-  - [ ] Game Over
-  - [ ] Point Gain
-- [ ] UI
-  - [ ] Create pause UI
+  - [x] Game Over
+  - [ ] ~~Point Gain
+- [x] UI
+  - [x] Create pause UI
     - [x] Hook up difficulty options
-    - [ ] SFX toggle
+    - [x] SFX toggle
       - [x] Create Sound Manager
+  - [x] Control instructions on startup
   - [x] Fix Game Over UI
+  - [x] Create tutorial UI
 
 ## Concept - What it is
 

@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="Orbital Asteroid Defense"
+config/description="Gravity is your friend, but mostly your enemy. Well, gravity, and the swarm of planet-killer asteroids hurtling towards your planet."
+config/version="1.0"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [display]
 
