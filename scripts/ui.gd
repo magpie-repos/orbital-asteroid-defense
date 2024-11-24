@@ -14,11 +14,12 @@ var difficulty_setting: int
 @onready var missile_icons: Node2D = $MissileIconDisplay
 @onready var pause_ui: Control = $PauseUI
 @onready var intro_ui: Control = $IntroUI
+@onready var pause_timeout_timer: Timer = $PauseTimer
 
 signal sound_toggle(value: bool)
 
-var intro_lockout: bool = true
-var paused: bool = true
+var intro_flag: bool = true
+var paused: bool = false
 var pause_timeout: bool = false
 
 func _ready() -> void:
@@ -28,27 +29,33 @@ func _process(delta: float) -> void:
 	icon_rotation_offset += deg_to_rad(5)
 
 	if Input.is_anything_pressed():
-		intro_ui.hide()
-		get_tree().paused = false
-		intro_lockout = false
-	if intro_lockout == false:
-		if Input.is_action_just_pressed("pause"):
-			if paused == false:
-				pause_game()
-			else:
-				resume_game()
+		if intro_flag:
+			##Intro box hide and unpause
+			intro_ui.hide()
+			get_tree().paused = false
+			pause_timeout = true
+			pause_timeout_timer.start()
+			intro_flag = false
+		
+		
+		if pause_timeout == false:
+			if Input.is_action_pressed("pause"):
+				if paused == false:
+					pause_game()
+				else:
+					resume_game()
 
 func pause_game() -> void:
 	get_tree().paused = true
 	pause_timeout = true
-	$PauseTimer.start()
+	pause_timeout_timer.start()
 	paused = true
 	pause_ui.show()
 
 func resume_game() -> void:
 	get_tree().paused = false
 	pause_timeout = true
-	$PauseTimer.start()
+	pause_timeout_timer.start()
 	paused = false
 	pause_ui.hide()
 
